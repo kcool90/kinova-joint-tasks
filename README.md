@@ -3,6 +3,7 @@
 Step 1: Download "kinova_joint_data" from main branch
 
 Step 2: Run this command in 3 different terminals:
+
 cd workspace/ros2_kortex_ws/
 
 Step 3: Run this command in those 3 terminals: 
