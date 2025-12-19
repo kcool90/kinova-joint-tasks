@@ -28,14 +28,13 @@ export KINOVA_JOINT_DATA=/path/to/kinova_joint_data
 Step 2: Build the workspace:
 ```bash
 cd workspace/ros2_kortex_ws/
-
 colcon build --symlink-install
 ```
 
 Step 3: Open two terminals with the workspace root and source them both: 
 ```bash
 cd workspace/ros2_kortex_ws/
-
+source /opt/ros/jazzy/setup.bash
 source install/setup.bash
 ```
 
