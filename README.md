@@ -1,26 +1,55 @@
 # kinova-joint-tasks
+This repo runs **pre-recorded joint waypoint tasks** on a Kinova Gen3 (6DOF) + Robotiq 2F-85 by sending:
+- `FollowJointTrajectory` to `/joint_trajectory_controller/follow_joint_trajectory`
+- `GripperCommand` to `/robotiq_gripper_controller/gripper_cmd`
+  
+-----------------------------------------------
 
-Step 1: Download "kinova_joint_data" from main branch
+  ## Prerequisites
+- ROS 2 installed (same distro you built Kortex for) (ours uses Jazzy)
+- Kinova Kortex ROS2 packages installed and working
+- Robot reachable on the network (example: `robot_ip:=192.168.1.10`)
 
-Step 2: Run this command in 3 different terminals:
+-----------------------------------------------
+
+Step 1: Download "kinova_joint_data" folder from main branch.
+Place the `kinova_joint_data/` folder somewhere. Default expected location is:
+
+- `~/kinova_joint_data/task1`
+- `~/kinova_joint_data/task2`
+- ...
+
+If you want it elsewhere, set:
+
+```bash
+export KINOVA_JOINT_DATA=/path/to/kinova_joint_data
+
+
+Step 2: Build the workspace:
 
 cd workspace/ros2_kortex_ws/
 
-Step 3: Run this command in those 3 terminals: 
+colcon build --symlink-install
+
+
+Step 3: Open two terminals with the workspace root and source them both: 
+
+cd workspace/ros2_kortex_ws/
 
 source install/setup.bash
+
 
 Step 4: Run this command in terminal 1:
 
 ros2 launch kortex_bringup gen3.launch.py   dof:=6   gripper:=robotiq_2f_85   use_fake_hardware:=false   fake_sensor_commands:=false   robot_ip:=192.168.1.10   launch_rviz:=true
 
+Change use_fake_hardware and fake_senser_commands to true if using simulation. 
+
+
 Step 5: Run this command in terminal 2:
-
-ros2 launch kinova_gen3_6dof_robotiq_2f_85_moveit_config move_group.launch.py   robot_ip:=192.168.1.10   use_fake_hardware:=false   use_sim_time:=false
-
-Step 6: Run this command in terminal 3:
 
 ros2 run moveit_joint_sender_py send_joint_state_goal task1
 
-where "task1" can be replaced by "task2", "task4", "task6", or "task8".
+Replace "task1" with any available task folder, e.g., "task2", "task4", "task6", or "task8".
 
+You should notice this command running a task on the robot arm. 
