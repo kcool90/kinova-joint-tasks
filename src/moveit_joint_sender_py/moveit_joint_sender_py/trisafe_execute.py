@@ -233,7 +233,7 @@ def run_inference(
     ts_stats: Optional[Path],
     infer_script: Optional[Path],
     infer_module: Optional[str],
-    infer_python: Optional[Path] = None,  # ✅ THIS MUST BE USED
+    infer_python: Optional[Path] = None,
     extra_args: Optional[List[str]] = None,
     debug: bool = False,
 ) -> None:
@@ -297,7 +297,6 @@ def main():
     ap.add_argument("--infer_script", default=None)
     ap.add_argument("--infer_module", default=None)
 
-    # ✅ NEW
     ap.add_argument("--infer_python", default=None,
                     help="Python interpreter for inference (venv python with torch).")
 
@@ -370,7 +369,7 @@ def main():
                 ts_stats=ts_stats,
                 infer_script=infer_script,
                 infer_module=infer_module,
-                infer_python=infer_python,   # ✅ CRITICAL
+                infer_python=infer_python,
                 extra_args=unknown,
                 debug=bool(args.debug),
             )
