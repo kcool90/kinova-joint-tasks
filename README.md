@@ -58,4 +58,4 @@ Step 5(b): **Run a task from human sensor data:**
 ```bash
 ros2 run moveit_joint_sender_py trisafe_execute   --infer_python "/home/pascal/workspace/ros2_kortex_ws/.venv/bin/python"   --csv "/home/pascal/Downloads/Tipu1/Sub-16/066_T116_synchronized_corrected_icml_consensus_labels.csv"   --ckpt "/home/pascal/Downloads/Tipu1/best_model_allsubjects_fold1.pt"   --stats "/home/pascal/Downloads/Tipu1/stats_allsubjects_fold1.json"   --tau 0.60   --infer_script "/home/pascal/Downloads/Tipu1/infer_single_trisafe_phase4match.py"   --map "1:task1,2:task2,3:task4,4:task6,5:task8"   --robot_pkg moveit_joint_sender_py   --robot_exec send_joint_state_goal   --loop --interval 1.0 --stable_k 3 --cooldown 3.0 --debug
 ```
-Change the path to your path.
+Change the path to your path. This should take data from specified paths and decide a task to perform based on that data.
