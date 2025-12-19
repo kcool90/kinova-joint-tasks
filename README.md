@@ -13,6 +13,7 @@ This repo runs **pre-recorded joint waypoint tasks** on a Kinova Gen3 (6DOF) + R
 -----------------------------------------------
 
 Step 1: Download "kinova_joint_data" folder from main branch.
+
 Place the `kinova_joint_data/` folder somewhere. Default expected location is:
 
 - `~/kinova_joint_data/task1`
