@@ -6,16 +6,17 @@ import yaml
 import argparse
 import re
 
-def extract_index(filename):
-    match = re.search(r'position(\d+)', filename)
-    return int(match.group(1)) if match else -1
-
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
 
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from control_msgs.action import FollowJointTrajectory, GripperCommand
+
+
+def extract_index(filename):
+    match = re.search(r"position(\d+)", filename)
+    return int(match.group(1)) if match else -1
 
 
 ARM_JOINTS = [
@@ -141,16 +142,27 @@ class JointTaskExecutor(Node):
 def main():
     parser = argparse.ArgumentParser(description="Execute a joint-space task")
     parser.add_argument("task_name", help="Task folder name (e.g. task1)")
+
+    # Portable default: use ~/kinova_joint_data (works for any username)
+    # Optional override: set env var KINOVA_JOINT_DATA or pass --base_path
     parser.add_argument(
         "--base_path",
-        default="/home/pascal/kinova_joint_data",
-        help="Base directory containing task folders",
+        default=os.environ.get("KINOVA_JOINT_DATA", "~/kinova_joint_data"),
+        help="Base directory containing task folders (default: ~/kinova_joint_data). "
+             "You can also set KINOVA_JOINT_DATA.",
     )
+
     args = parser.parse_args()
 
-    task_path = os.path.join(args.base_path, args.task_name)
+    base_path = os.path.expanduser(args.base_path)
+    task_path = os.path.join(base_path, args.task_name)
+
     if not os.path.isdir(task_path):
-        raise RuntimeError(f"Task path does not exist: {task_path}")
+        raise RuntimeError(
+            f"Task path does not exist: {task_path}\n"
+            f"Tip: pass --base_path /path/to/kinova_joint_data or set "
+            f"KINOVA_JOINT_DATA=/path/to/kinova_joint_data"
+        )
 
     rclpy.init()
     node = JointTaskExecutor(task_path)
