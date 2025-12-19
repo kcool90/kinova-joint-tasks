@@ -22,8 +22,8 @@ Place the `kinova_joint_data/` folder somewhere. Default expected location is:
 If you want it elsewhere, set:
 
 ```bash
-export KINOVA_JOINT_DATA=/path/to/kinova_joint_data```bash
-
+export KINOVA_JOINT_DATA=/path/to/kinova_joint_data
+```
 
 Step 2: Build the workspace:
 
