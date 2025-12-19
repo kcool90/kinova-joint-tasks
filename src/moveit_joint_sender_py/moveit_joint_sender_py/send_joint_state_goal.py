@@ -126,7 +126,7 @@ class JointTaskExecutor(Node):
                     gripper_position = pos
 
             if arm_positions:
-                if not self.send_arm_goal(arm_positions, duration=6.0):
+                if not self.send_arm_goal(arm_positions, duration=4.0):
                     self.get_logger().error("Stopping task due to arm failure")
                     return
 

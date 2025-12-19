@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'send_joint_state_goal = moveit_joint_sender_py.send_joint_state_goal:main',
+            'trisafe_execute = moveit_joint_sender_py.trisafe_execute:main',
         ],
     },
 )
